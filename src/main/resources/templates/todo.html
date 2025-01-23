@@ -10,7 +10,7 @@
         $(document).ready(function () {
             function getExistingTodoData(row) {
                 return {
-                    id: row.find('.todo-id').text(),
+                    id: row.data('id'), // 데이터 속성에서 id 가져옴
                     content: row.find('.todo-content').text(),
                     status: row.find('.todo-status').text() === 'Completed',
                     dueDate: row.find('.todo-due-date').text()
@@ -114,7 +114,8 @@
             });
 
             $('.delete-btn').click(function () {
-                const id = $(this).data('id');
+                const row = $(this).closest('tr');
+                const id = row.data('id');
                 $.ajax({
                     url: `/${id}`,
                     method: 'DELETE',
@@ -146,16 +147,16 @@
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="todo, iterStat : ${todos}">
+                <tr th:each="todo, iterStat : ${todos}" th:data-id="${todo.id}">
                     <td class="todo-no" th:text="${iterStat.index + 1}"></td>
                     <td class="todo-content" th:text="${todo.content}"></td>
                     <td class="todo-status" th:text="${todo.status} ? 'Completed' : 'Pending'"></td>
                     <td class="todo-due-date" th:text="${todo.dueDate}"></td>
                     <td>
-                        <button class="btn btn-primary btn-sm update-content-btn" th:data-id="${todo.id}">Update Content</button>
-                        <button class="btn btn-info btn-sm update-due-date-btn" th:data-id="${todo.id}">Update Due Date</button>
-                        <button class="btn btn-warning btn-sm update-status-btn" th:data-id="${todo.id}">Update Status</button>
-                        <button class="btn btn-danger btn-sm delete-btn" th:data-id="${todo.id}">Delete</button>
+                        <button class="btn btn-primary btn-sm update-content-btn">Update Content</button>
+                        <button class="btn btn-info btn-sm update-due-date-btn">Update Due Date</button>
+                        <button class="btn btn-warning btn-sm update-status-btn">Update Status</button>
+                        <button class="btn btn-danger btn-sm delete-btn">Delete</button>
                     </td>
                 </tr>
             </tbody>

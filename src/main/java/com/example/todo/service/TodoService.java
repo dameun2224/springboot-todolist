@@ -32,10 +32,12 @@ public class TodoService {
 
     public void updateTodo(Long id,TodoDto todoDto) {
         Optional<Todo> todo = repository.findById(id);
-        Todo tmp = todo.get();
-        tmp.setContent(todoDto.getContent());
-        tmp.setDueDate(todoDto.getDueDate());
-        tmp.setStatus(todoDto.getStatus());
-        repository.save(tmp);
+        todo.ifPresent(a->{
+            Todo tmp = todo.get();
+            tmp.setContent(todoDto.getContent());
+            tmp.setDueDate(todoDto.getDueDate());
+            tmp.setStatus(todoDto.getStatus());
+            repository.save(tmp);
+        });
     }
 }
