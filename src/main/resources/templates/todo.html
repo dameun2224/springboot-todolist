@@ -130,6 +130,39 @@
             });
         });
     </script>
+    <style>
+        table {
+            table-layout: fixed;
+            width: 100%;
+        }
+    
+        table th, table td {
+            text-align: center;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+    
+        table th:nth-child(1), table td:nth-child(1) {
+            width: 5%; /* No. 컬럼 */
+        }
+    
+        table th:nth-child(2), table td:nth-child(2) {
+            width: 33%; /* Content 컬럼 */
+        }
+    
+        table th:nth-child(3), table td:nth-child(3) {
+            width: 10%; /* Status 컬럼 */
+        }
+    
+        table th:nth-child(4), table td:nth-child(4) {
+            width: 12%; /* Due Date 컬럼 */
+        }
+    
+        table th:nth-child(5), table td:nth-child(5) {
+            width: 40%; /* Actions 컬럼 */
+        }
+    </style>    
 </head>
 <body class="bg-light">
     <div class="container my-5">
